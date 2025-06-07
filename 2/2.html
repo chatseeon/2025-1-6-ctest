@@ -1,0 +1,957 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>C语言程序设计练习试卷2</title>
+    <style>
+        body {
+            font-family: 'Microsoft YaHei', Arial, sans-serif;
+            line-height: 1.6;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f5f5f5;
+            color: #333;
+        }
+        h1 {
+            text-align: center;
+            color: #2c3e50;
+            border-bottom: 2px solid #3498db;
+            padding-bottom: 10px;
+        }
+        h2 {
+            color: #2980b9;
+            border-left: 4px solid #3498db;
+            padding-left: 10px;
+            margin-top: 30px;
+        }
+        .question {
+            background-color: white;
+            padding: 15px;
+            margin-bottom: 15px;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        .options {
+            margin: 10px 0;
+        }
+        .option {
+            margin: 5px 0;
+            padding: 5px 10px;
+            cursor: pointer;
+            border-radius: 3px;
+            transition: background-color 0.3s;
+        }
+        .option:hover {
+            background-color: #f0f0f0;
+        }
+        .option.selected {
+            background-color: #d4edff;
+        }
+        .option.correct {
+            background-color: #d4edda;
+            color: #155724;
+        }
+        .option.wrong {
+            background-color: #f8d7da;
+            color: #721c24;
+        }
+        .explanation {
+            display: none;
+            padding: 10px;
+            margin-top: 10px;
+            background-color: #e9ecef;
+            border-radius: 3px;
+            font-size: 0.9em;
+        }
+        .explanation.show {
+            display: block;
+        }
+        button {
+            background-color: #3498db;
+            color: white;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 3px;
+            cursor: pointer;
+            margin-top: 10px;
+            transition: background-color 0.3s;
+        }
+        button:hover {
+            background-color: #2980b9;
+        }
+        .score-display {
+            text-align: center;
+            font-size: 1.2em;
+            margin: 20px 0;
+            padding: 10px;
+            background-color: #e3f2fd;
+            border-radius: 5px;
+        }
+        .code {
+            font-family: 'Courier New', Courier, monospace;
+            background-color: #f8f9fa;
+            padding: 10px;
+            border-radius: 3px;
+            overflow-x: auto;
+        }
+        .error-line {
+            background-color: #fff3cd;
+        }
+        .blank-line {
+            background-color: #d1ecf1;
+        }
+    </style>
+</head>
+<body>
+    <h1>C语言程序设计练习试卷2</h1>
+    
+    <div class="score-display">
+        得分: <span id="score">0</span> / <span id="total">100</span>
+    </div>
+
+    <h2>一、选择题（每题2分，共50分）</h2>
+    
+    <div id="questions-container">
+        <!-- 选择题将在这里动态生成 -->
+    </div>
+
+    <h2>二、改错题（每题15分，共30分）</h2>
+    
+    <div class="question">
+        <p>1. 题目如下图</p>
+        <img src="屏幕截图 2025-06-05 180806-1.png" alt="输出图形示例" style="max-height: 200px; margin: 10px 0;">
+        <pre class="code">
+#include &lt;stdio.h&gt;
+void main()
+{
+    int i,j;
+    char ch='A';
+    i=<span class="error-line">0</span>;                   /*$ERROR$*/    
+    while(i&lt;=5) 
+    {
+        j=1;
+        while(j&lt;i)
+        {  
+            printf(" ");    /*输出一个空格*/
+            j<span class="error-line">+1</span>;            /*$ERROR$*/
+        }
+        j=1;             
+        while(j&lt;=5)
+        { 
+            printf("%c", ch);   
+            j++;  
+        }
+        printf("<span class="error-line">/n</span>");      /*$ERROR$*/
+        ch=ch+1;            
+        i++;  
+    }
+}</pre>
+        <div class="options">
+            <p>请指出错误并修改：</p>
+            <p>1. 第一处错误：<input type="text" id="correction1" placeholder="请输入修正后的代码"></p>
+            <p>2. 第二处错误：<input type="text" id="correction2" placeholder="请输入修正后的代码"></p>
+            <p>3. 第三处错误：<input type="text" id="correction3" placeholder="请输入修正后的代码"></p>
+        </div>
+        <button onclick="checkCorrections()">提交改错题答案</button>
+        <div id="correction-feedback" class="explanation"></div>
+    </div>
+
+    <div class="question">
+        <p>2. 函数fmax的功能是：查找一维数组中最大元素的下标。主函数调用fmax，查找并输出一维数组的最大元素及其下标。</p>
+        <pre class="code">
+#include &lt;stdio.h&gt;
+int fmax(int a[],int n) 
+{
+    int i,index;
+    index=0;           
+    for(i=1;i&lt;n;i++)
+    {
+        if(a[i]&gt;a[index])  
+            index=i; 
+    }
+    return <span class="error-line">i</span>;              /*$ERROR$*/      
+}
+void main()
+{
+    int a[10],i;
+    int index;
+    printf("请输入10个整数:");
+    for(i=0;i&lt;10;i++)
+       scanf("%d",<span class="error-line">a[i]</span>);    /*$ERROR$*/    
+    index=fmax(<span class="error-line">a[10]</span>,10);           /*$ERROR$*/
+    printf("max=%d,index=%d\n",a[index],index);
+}</pre>
+        <div class="options">
+            <p>请指出错误并修改：</p>
+            <p>1. 第一处错误：<input type="text" id="correction4" placeholder="请输入修正后的代码"></p>
+            <p>2. 第二处错误：<input type="text" id="correction5" placeholder="请输入修正后的代码"></p>
+            <p>3. 第三处错误：<input type="text" id="correction6" placeholder="请输入修正后的代码"></p>
+        </div>
+        <button onclick="checkCorrections2()">提交改错题答案</button>
+        <div id="correction-feedback2" class="explanation"></div>
+    </div>
+
+    <h2>三、程序填空题（每空5分，共15分）</h2>
+    
+    <div class="question">
+        <p>从键盘输入两个正整数，计算并输出两数的最小公倍数。</p>
+        <pre class="code">
+#include &lt;stdio.h&gt;
+void main()
+{
+    int a,b,t,m;
+    printf("Enter a,b:");
+    scanf("%d%d",<span class="blank-line">___________</span>);  /*$BLANK$*/
+    m=a*b;
+    if(a&lt;b)/*确保a存放较大的数，b存放较小的数*/
+    {
+        t=a;
+        a=b;
+        <span class="blank-line">___________</span>;      /*$BLANK$*/
+    }
+    while(b!=0)
+    {
+        t=a%b;
+        a=b;
+        b=t;
+    }
+    printf("最小公倍数为：%d\n",<span class="blank-line">___________</span>);   /*$BLANK$*/
+}</pre>
+        <div class="options">
+            <p>请填写空白处：</p>
+            <p>1. 第一处空白：<input type="text" id="blank1" placeholder="请输入填空内容"></p>
+            <p>2. 第二处空白：<input type="text" id="blank2" placeholder="请输入填空内容"></p>
+            <p>3. 第三处空白：<input type="text" id="blank3" placeholder="请输入填空内容"></p>
+        </div>
+        <button onclick="checkBlanks()">提交填空题答案</button>
+        <div id="blank-feedback" class="explanation"></div>
+    </div>
+
+    <h2>四、综合应用题（共30分）</h2>
+    
+    <div class="question">
+        <p>1. （8分）题目如下图</p>
+        <img src="屏幕截图 2025-06-05 181037-1.png" alt="出租车计费问题" style="max-height: 200px; margin: 10px 0;">
+        <div class="options">
+            <p>请编写完整程序：</p>
+            <textarea id="program1" rows="10" style="width:100%; font-family: 'Courier New', Courier, monospace;" placeholder="请在此处编写程序代码"></textarea>
+        </div>
+        <button onclick="checkProgram1()">提交程序答案</button>
+        <div id="program1-feedback" class="explanation"></div>
+    </div>
+
+    <div class="question">
+        <p>2. （10分）计算1到2000之间所有能被21整除且个位数字不是7的自然数之和。</p>
+        <p>说明：(1)要求使用循环实现；(2)输出结果形式为：sum=1234</p>
+        <div class="options">
+            <p>请编写完整程序：</p>
+            <textarea id="program2" rows="10" style="width:100%; font-family: 'Courier New', Courier, monospace;" placeholder="请在此处编写程序代码"></textarea>
+        </div>
+        <button onclick="checkProgram2()">提交程序答案</button>
+        <div id="program2-feedback" class="explanation"></div>
+    </div>
+
+    <div class="question">
+        <p>3. （12分）[邮票问题]邮局现有5角、8角、1元三种面值的邮票，一个顾客邮寄物品需要邮资为12元，问邮递员用这三种邮票给出12元邮资有多少种方法(可以只出现1或2种邮票)。</p>
+        <p>输出格式为：共有 12 种方法</p>
+        <div class="options">
+            <p>请编写完整程序：</p>
+            <textarea id="program3" rows="10" style="width:100%; font-family: 'Courier New', Courier, monospace;" placeholder="请在此处编写程序代码"></textarea>
+        </div>
+        <button onclick="checkProgram3()">提交程序答案</button>
+        <div id="program3-feedback" class="explanation"></div>
+    </div>
+
+    <script>
+        // 试题数据
+        const questions = [
+            {
+                question: "1. 一个C程序的执行是从______。",
+                options: [
+                    "A. 本程序的main函数开始，到main函数结束",
+                    "B. 本文件的第一个函数开始，到本文件的最后一个函数结束",
+                    "C. 本程序的main函数开始，到本文件的最后一个函数结束",
+                    "D. 本文件的第一个函数开始，到本文件的main结束"
+                ],
+                correct: 0,
+                explanation: "解析：C程序总是从main函数开始执行，并在main函数结束时终止。"
+            },
+            {
+                question: "2. 以下选项中可作为C语言整型常量的是______。",
+                options: [
+                    "A. 1110B",
+                    "B. 0583",
+                    "C. x2b2",
+                    "D. 0xab"
+                ],
+                correct: 3,
+                explanation: "解析：0xab是十六进制整型常量。A选项二进制表示错误；B选项八进制不能有8；C选项缺少前缀0x。"
+            },
+            {
+                question: "3. 以下选项中不合法的C语言标识符是______。",
+                options: [
+                    "A. print",
+                    "B. FOR",
+                    "C. &&a",
+                    "D. _00"
+                ],
+                correct: 2,
+                explanation: "解析：&&a包含非法字符&，标识符只能由字母、数字和下划线组成。"
+            },
+            {
+                question: "4. 若定义：int i=3,j=4,k=5;，则表达式i*j+j/k-k%i的值是______。",
+                options: [
+                    "A. 10",
+                    "B. 10.8",
+                    "C. 14",
+                    "D. 14.8"
+                ],
+                correct: 0,
+                explanation: "解析：计算顺序：3 * 4=12;4/5=0;5%3=2 → 12+0-2=10。"
+            },
+            {
+                question: "5. 设有int m,n=10;，则执行语句m=n++;后m、n的值分别为______。",
+                options: [
+                    "A. 10,10",
+                    "B. 10,11",
+                    "C. 11,10",
+                    "D. 11,11"
+                ],
+                correct: 1,
+                explanation: "解析：n++是先赋值后自增，所以m=10，然后n变为11。"
+            },
+            {
+                question: "6. 已知int i,j;，则执行语句i=(j=2 * 3,j*5),i+6;后，变量j的值是______。",
+                options: [
+                    "A. 6",
+                    "B. 12",
+                    "C. 30",
+                    "D. 36"
+                ],
+                correct: 0,
+                explanation: "解析：逗号表达式从左到右计算，j=2 * 3=6，j*5=30但不改变j值。"
+            },
+            {
+                question: "7. 下列表达式中，______满足\"当x为偶数时值为真，为奇数时值为假\"的要求。",
+                options: [
+                    "A. x%2==0",
+                    "B. x%2==1",
+                    "C. x%2!=0",
+                    "D. x%2"
+                ],
+                correct: 0,
+                explanation: "解析：x%2==0在x为偶数时为真(1)，奇数时为假(0)。"
+            },
+            {
+                question: "8. 有定义:int a=10,b=5;，以下不合法的C语言语句是______。",
+                options: [
+                    "A. a=b+1;",
+                    "B. a=b;",
+                    "C. b=a;",
+                    "D. b+1=a;"
+                ],
+                correct: 3,
+                explanation: "解析：D选项试图给表达式b+1赋值，这是非法的。"
+            },
+            {
+                question: "9. 已知：double x;int y;，用语句scanf(\"%lf,%d\",&x,&y);输入变量x、y的值，正确的输入是______。",
+                options: [
+                    "A. 1.11,1",
+                    "B. 1.11 1",
+                    "C. 1.11:1",
+                    "D. 1.11;1"
+                ],
+                correct: 0,
+                explanation: "解析：scanf格式字符串中指定了逗号分隔符，必须严格匹配。"
+            },
+            {
+                question: "10. 已知int x=1,y=2,z=3;，则以下语句执行后，x、y、z的结果是_______。<br>if(x&lt;y) {z=x;x=y;y=z;}",
+                options: [
+                    "A. x=1,y=2,z=3",
+                    "B. x=2,y=1,z=3",
+                    "C. x=2,y=1,z=1",
+                    "D. x=2,y=3,z=2"
+                ],
+                correct: 2,
+                explanation: "解析：if条件成立，执行顺序：z=x=1;x=y=2;y=z=1。"
+            },
+            {
+                question: "11. 设有int a=1;，则执行以下语句后输出______。<br>switch(a){<br>case 1: printf(\"全国高校\");<br>case 2: printf(\"计算机\");<br>default:printf(\"水平考试\");<br>}",
+                options: [
+                    "A. 全国高校计算机水平考试",
+                    "B. 全国高校",
+                    "C. 全国高校计算机",
+                    "D. 计算机水平考试"
+                ],
+                correct: 0,
+                explanation: "解析：没有break语句，会从匹配的case开始一直执行到最后。"
+            },
+            {
+                question: "12. 若i为整型变量，则下列循环体执行次数是______。<br>for(i=2;i==0;) printf(\"%d\\n\",i--);",
+                options: [
+                    "A. 2次",
+                    "B. 1次",
+                    "C. 0次",
+                    "D. 无限次"
+                ],
+                correct: 2,
+                explanation: "解析：初始i=2不满足i==0，循环体一次也不执行。"
+            },
+            {
+                question: "13. 下列程序段中循环体语句_______。<br>int y=15;<br>do { <br>printf(\"%d\",--y); <br>}while(y=0);",
+                options: [
+                    "A. 执行无限次",
+                    "B. 有语法错误",
+                    "C. 执行一次",
+                    "D. 一次也不执行"
+                ],
+                correct: 2,
+                explanation: "解析：do-while至少执行一次，--y使y=14，while(y=0)将y赋值为0且条件为假。"
+            },
+            {
+                question: "14. 执行以下程序段后，输出的结果是______。<br>int a,b=0;<br>for(a=1;a&lt;=10;a++){ <br>b=b+a;<br>if(b&gt;=15&&a%2==0) break;<br>}<br>printf(\"%d\\n\",a);",
+                options: [
+                    "A. 10",
+                    "B. 11",
+                    "C. 6",
+                    "D. 5"
+                ],
+                correct: 2,
+                explanation: "解析：循环过程：a=1,b=1; a=2,b=3; a=3,b=6; a=4,b=10; a=5,b=15; a=6,b=21(满足条件退出)。"
+            },
+            {
+                question: "15. 以下能对一维数组a进行正确初始化的是______。",
+                options: [
+                    "A. int a[5]=(1,0,1,0,1);",
+                    "B. int a[10]={ };",
+                    "C. int a[3]={0},{1},{2};",
+                    "D. int a[100]={10 * 10};"
+                ],
+                correct: 3,
+                explanation: "解析：D选项初始化第一个元素为100。A选项应用花括号；B选项C99标准支持；C选项语法错误。"
+            },
+            {
+                question: "16. 设有定义：int a[][3]={1,2,3,4,5,6,7,8};，则数组a的第1维长度是______。",
+                options: [
+                    "A．2",
+                    "B．3",
+                    "C．4",
+                    "D．8"
+                ],
+                correct: 1,
+                explanation: "解析：共8个元素，每行3列，所以行数为⌈8/3⌉=3。"
+            },
+            {
+                question: "17. 设有char s[2][10]={\"12\",\"34\"};，则数组s占用______个字节。",
+                options: [
+                    "A. 2",
+                    "B. 10",
+                    "C. 20",
+                    "D. 4"
+                ],
+                correct: 2,
+                explanation: "解析：2行×10列=20个char，每个char占1字节。"
+            },
+            {
+                question: "18. 下列函数定义中，正确的是______。",
+                options: [
+                    "A. void fun(int x,int y){}",
+                    "B. void fun(int x;int y){}",
+                    "C. void fun(int x,int y);{}",
+                    "D. void fun(int x,y){}"
+                ],
+                correct: 0,
+                explanation: "解析：A选项是正确函数定义。B选项参数分隔错误；C选项多分号；D选项缺少y的类型。"
+            },
+            {
+                question: "19. 下面叙述中不正确的是______。",
+                options: [
+                    "A. 静态存储是指在变量定义时就分配存储单元并一直保持，整个程序结束后也不消失",
+                    "B. C语言中不同存储类型的变量，存放的位置不同",
+                    "C. 动态存储是指在程序执行过程中，使用到变量时才分配存储单元",
+                    "D. 变量的存储方式通常可分为\"动态存储\"和\"静态存储\"两种"
+                ],
+                correct: 0,
+                explanation: "解析：静态存储变量的生命周期是整个程序运行期间，但程序结束后会释放。"
+            },
+            {
+                question: "20. 执行以下程序后，输出结果是______。<br>#include&lt;stdio.h&gt;<br>void fun(int *a, int *b){<br>int *t;<br>t=a;a=b;b=t;<br>}<br>void main(){ <br>int x=3, y=4;<br>fun(&x, &y);<br>printf(\"%d, %d\", x, y);<br>}",
+                options: [
+                    "A. 3, 3",
+                    "B. 3, 4",
+                    "C. 4, 3",
+                    "D. 4, 4"
+                ],
+                correct: 1,
+                explanation: "解析：函数内交换的是指针副本，不影响实参。"
+            },
+            {
+                question: "21. 设有定义：float a=3;，则对实型指针变量p的定义和初始化正确的是______。",
+                options: [
+                    "A. float *p=a;",
+                    "B. float p=a;",
+                    "C. float *p=&a;",
+                    "D. float *p=*a;"
+                ],
+                correct: 2,
+                explanation: "解析：C选项正确，指针变量p存储a的地址。A选项类型不匹配；D选项对a解引用错误。"
+            },
+            {
+                question: "22. 设有定义、初始化及赋值：int a[10]={0,1,2,3,4,5,6,7,8,9},*p;p=a;，则值为6的表达式为______。",
+                options: [
+                    "A. a[5]",
+                    "B. *(p+5)",
+                    "C. *(a+6)",
+                    "D. *p[6]"
+                ],
+                correct: 2,
+                explanation: "解析：*(a+6)等价于a[6]=6。A选项a[5]=5；B选项*(p+5)=5；D选项语法错误。"
+            },
+            {
+                question: "23. 下列程序输出的结果为______。<br>#include &lt;stdio.h&gt;<br>#define M(x) x*(x+1)<br>void main(){ <br>int a=2,b=3;<br>printf(\"%d\",M(a+b));<br>}",
+                options: [
+                    "A. 17",
+                    "B. 20",
+                    "C. 25",
+                    "D. 30"
+                ],
+                correct: 1,
+                explanation: "解析：宏展开为a+b*(a+b+1)=2+3*(2+3+1)=2+18=20。"
+            },
+            {
+                question: "24. 已知：<br>struct st{<br>int num; <br>char sex; <br>float score;<br>}stud,*p=&stud;<br>则对于结构体变量stud的成员num正确的引用是______。",
+                options: [
+                    "A. stud->num",
+                    "B. st.num",
+                    "C. p->num",
+                    "D. p.num"
+                ],
+                correct: 2,
+                explanation: "解析：通过指针访问结构体成员用->运算符。A选项应为stud.num；B选项结构体名不能直接访问；D选项应为(*p).num。"
+            },
+            {
+                question: "25. 在C语言中，用w+方式打开一个文件后，可以执行的文件操作是______。",
+                options: [
+                    "A. 既能读又能写",
+                    "B. 只读",
+                    "C. 只写",
+                    "D. 既不能读也不能写"
+                ],
+                correct: 0,
+                explanation: "解析：\"w+\"模式打开文件可读可写，文件不存在则创建，存在则清空。"
+            }
+        ];
+
+        // 改错题和填空题的正确答案
+        const correctionAnswers = {
+            correction1: "i=1",
+            correction2: "j++",
+            correction3: "'\\n'",
+            correction4: "return index",
+            correction5: "&a[i]",
+            correction6: "a",
+            blank1: "&a,&b",
+            blank2: "b=t",
+            blank3: "m/a"
+        };
+
+        // 综合应用题参考答案
+        const programAnswers = {
+            program1: `#include &lt;stdio.h&gt;
+void main()
+{
+    double s,f;
+    printf("请输入出租车运行里程:");
+    scanf("%lf",&s);
+    if(s<=0)
+        printf("出租车运行里程不能小于等于零。\\n");
+    else
+    {   if(s<=3)
+            f=6;
+        else if(s<=50)
+            f=2.4+1.2*s;
+        else
+            f=12.4+s;
+        printf("f=%.2lf\\n",f);
+    }
+}`,
+            program2: `#include &lt;stdio.h&gt;
+void main()
+{
+    long sum=0;
+    int n;
+    for(n=1;n<=2000;n++)
+    {
+        if(n%21==0&&n%10!=7)
+            sum+=n;
+    }
+    printf("sum=%ld\\n",sum);
+}`,
+            program3: `#include &lt;stdio.h&gt;
+void main()
+{
+    int count=0;
+    int a,b,c;
+    for(a=0;a<=24;a++)
+        for(b=0;b<=15;b++)
+            for(c=0;c<=12;c++)
+                if(a*0.5+b*0.8+c==12)
+                    count++;
+    printf("共有 %d 种方法\\n",count);
+}`
+        };
+
+        // 初始化试卷
+        let score = 0;
+        let answeredQuestions = 0;
+        const totalScore = 100;
+        const questionsContainer = document.getElementById('questions-container');
+
+        // 渲染选择题
+        questions.forEach((q, index) => {
+            const questionDiv = document.createElement('div');
+            questionDiv.className = 'question';
+            questionDiv.innerHTML = `
+                <p>${q.question}</p>
+                <div class="options">
+                    ${q.options.map((opt, i) => `
+                        <div class="option" onclick="selectOption(this, ${index}, ${i})">${opt}</div>
+                    `).join('')}
+                </div>
+                <div id="explanation-${index}" class="explanation">${q.explanation}</div>
+            `;
+            questionsContainer.appendChild(questionDiv);
+        });
+
+        // 更新分数显示
+        function updateScore() {
+            document.getElementById('score').textContent = score;
+            document.getElementById('total').textContent = totalScore;
+        }
+
+        // 选择选项
+        window.selectOption = function(element, questionIndex, optionIndex) {
+            const question = questions[questionIndex];
+            const options = element.parentElement.children;
+            
+            // 移除之前的选择
+            for (let i = 0; i < options.length; i++) {
+                options[i].classList.remove('selected', 'correct', 'wrong');
+            }
+            
+            // 标记当前选择
+            element.classList.add('selected');
+            
+            // 检查答案
+            if (optionIndex === question.correct) {
+                element.classList.add('correct');
+                // 只有第一次答对才加分
+                if (!question.answered) {
+                    score += 2;
+                    question.answered = true;
+                    answeredQuestions++;
+                    updateScore();
+                }
+            } else {
+                element.classList.add('wrong');
+                // 标记正确答案
+                options[question.correct].classList.add('correct');
+            }
+            
+            // 显示解析
+            document.getElementById(`explanation-${questionIndex}`).classList.add('show');
+        };
+
+        // 检查改错题答案
+        window.checkCorrections = function() {
+            // 标准化函数：处理全角/半角符号、多余空格等
+            const normalizeCode = (code) => {
+                return code
+                    .replace(/；/g, ';')  // 中文分号 → 英文分号
+                    .replace(/\s+/g, '')  // 移除所有空格
+                    .toLowerCase();
+            };
+
+            // 正确答案配置（支持多种形式）
+            const answers = {
+                1: ["i=1", "i=1;"], 
+                2: ["j++", "j++;"],
+                3: ["printf(\"\\n\")", "printf(\"\\n\");", "printf('\\n');"]
+            };
+
+            let score = 0;
+            const feedback = document.getElementById('correction-feedback');
+            let feedbackHtml = "";
+
+            // 检查每个空
+            for (let i = 1; i <= 3; i++) {
+                const userAnswer = normalizeCode(document.getElementById(`correction${i}`).value);
+                const isCorrect = answers[i].some(correct => normalizeCode(correct) === userAnswer);
+
+                if (isCorrect) {
+                    score += 5;
+                    feedbackHtml += `<p>✅ 第 ${i} 处正确 (+5分)</p>`;
+                } else {
+                    feedbackHtml += `<p>❌ 第 ${i} 处错误：应为 <code>${answers[i][0]}</code></p>`;
+                }
+            }
+
+            // 更新分数和反馈
+            this.score += score;
+            updateScore();
+            feedback.innerHTML = `${feedbackHtml}<p>总计得分：${score}/15 分</p>`;
+            feedback.classList.add('show');
+        };
+
+        // 检查第二道改错题答案
+        window.checkCorrections2 = function() {
+            // 标准化函数：处理全角/半角符号、多余空格等
+            const normalizeCode = (code) => {
+                return code
+                    .replace(/；/g, ';')  // 中文分号 → 英文分号
+                    .replace(/\s+/g, '')  // 移除所有空格
+                    .toLowerCase();
+            };
+
+            // 正确答案配置（支持多种形式）
+            const answers = {
+                4: ["return index", "return index;"], 
+                5: ["&a[i]", "&a[i];"],
+                6: ["a", "a;"]
+            };
+
+            let score = 0;
+            const feedback = document.getElementById('correction-feedback2');
+            let feedbackHtml = "";
+
+            // 检查每个空
+            for (let i = 4; i <= 6; i++) {
+                const userAnswer = normalizeCode(document.getElementById(`correction${i}`).value);
+                const isCorrect = answers[i].some(correct => normalizeCode(correct) === userAnswer);
+
+                if (isCorrect) {
+                    score += 5;
+                    feedbackHtml += `<p>✅ 第 ${i-3} 处正确 (+5分)</p>`;
+                } else {
+                    feedbackHtml += `<p>❌ 第 ${i-3} 处错误：应为 <code>${answers[i][0]}</code></p>`;
+                }
+            }
+
+            // 更新分数和反馈
+            this.score += score;
+            updateScore();
+            feedback.innerHTML = `${feedbackHtml}<p>总计得分：${score}/15 分</p>`;
+            feedback.classList.add('show');
+        };
+
+        // 检查填空题答案
+        window.checkBlanks = function() {
+            // 标准化函数：处理全角/半角符号、多余空格等
+            const normalizeCode = (code) => {
+                return code
+                    .replace(/；/g, ';')  // 中文分号 → 英文分号
+                    .replace(/\s+/g, '')  // 移除所有空格
+                    .toLowerCase();
+            };
+
+            // 正确答案配置（支持多种形式）
+            const answers = {
+                1: ["&a,&b", "&a,&b;", "&a,&b"], 
+                2: ["b=t", "b=t;"],
+                3: ["m/a", "m/a;"]
+            };
+
+            let score = 0;
+            const feedback = document.getElementById('blank-feedback');
+            let feedbackHtml = "";
+
+            // 检查每个空
+            for (let i = 1; i <= 3; i++) {
+                const userAnswer = normalizeCode(document.getElementById(`blank${i}`).value);
+                const isCorrect = answers[i].some(correct => normalizeCode(correct) === userAnswer);
+
+                if (isCorrect) {
+                    score += 5;
+                    feedbackHtml += `<p>✅ 第 ${i} 处正确 (+5分)</p>`;
+                } else {
+                    feedbackHtml += `<p>❌ 第 ${i} 处错误：应为 <code>${answers[i][0]}</code></p>`;
+                }
+            }
+
+            // 更新分数和反馈
+            this.score += score;
+            updateScore();
+            feedback.innerHTML = `${feedbackHtml}<p>总计得分：${score}/15 分</p>`;
+            feedback.classList.add('show');
+        };
+
+        // 应用题增强版代码验证方法
+        window.checkProgram1 = function() {
+            const userCode = document.getElementById('program1').value.trim();
+            const feedback = document.getElementById('program1-feedback');
+            
+            let score = 0;
+            const checks = [
+                { 
+                    pattern: /#include\s*<stdio\.h>/i, 
+                    weight: 1,
+                    message: "✅ 包含标准输入输出头文件"
+                },
+                { 
+                    pattern: /(double|float)\s+[^;]*\bs\b[^;]*\bf\b/i, 
+                    weight: 1,
+                    message: "✅ 正确定义了变量"
+                },
+                {
+                    pattern: /scanf\s*\(\s*"%lf"\s*,\s*&s\s*\)/i,
+                    weight: 2,
+                    message: "✅ 正确获取输入数据"
+                },
+                {
+                    pattern: /if\s*\(\s*s\s*<=\s*3\s*\)/i,
+                    weight: 2,
+                    message: "✅ 包含3公里以内计费逻辑"
+                },
+                {
+                    pattern: /else\s*if\s*\(\s*s\s*<=\s*50\s*\)/i,
+                    weight: 2,
+                    message: "✅ 包含3-50公里计费逻辑"
+                },
+                {
+                    pattern: /f\s*=\s*12\.4\s*\+\s*s/i,
+                    weight: 2,
+                    message: "✅ 包含50公里以上计费逻辑"
+                }
+            ];
+
+            let feedbackMsg = "<strong>检查结果：</strong><br>";
+            checks.forEach(check => {
+                if (check.pattern.test(userCode)) {
+                    score += check.weight;
+                    feedbackMsg += check.message + `<br>`;
+                } else {
+                    feedbackMsg += `❌ 缺少：${check.message.replace("✅ ", "")}<br>`;
+                }
+            });
+
+            const finalScore = Math.min(8, Math.floor(score * 8 / 10));
+            this.score += finalScore;
+            
+            feedbackMsg += finalScore >= 6 ? 
+                `<br>💡 得分：${finalScore}/8 (良好)` : 
+                `<br>💡 得分：${finalScore}/8 (参考代码：<pre>${programAnswers.program1}</pre>)`;
+
+            updateScore();
+            feedback.innerHTML = feedbackMsg;
+            feedback.classList.add('show');
+        };
+
+        window.checkProgram2 = function() {
+            const userCode = document.getElementById('program2').value.trim();
+            const feedback = document.getElementById('program2-feedback');
+            
+            let score = 0;
+            const checks = [
+                {
+                    pattern: /for\s*\(\s*n\s*=\s*1\s*;\s*n\s*<=\s*2000\s*;\s*n\+\+\s*\)/i,
+                    weight: 3,
+                    message: "✅ 正确实现1-2000循环"
+                },
+                {
+                    pattern: /if\s*\(\s*n\s*%21\s*==\s*0\s*&&\s*n\s*%10\s*!=\s*7\s*\)/i,
+                    weight: 4,
+                    message: "✅ 包含正确的条件判断"
+                },
+                {
+                    pattern: /sum\s*\+=\s*n|sum\s*=\s*sum\s*\+\s*n/i,
+                    weight: 3,
+                    message: "✅ 包含正确的累加逻辑"
+                }
+            ];
+
+
+            let feedbackMsg = "<strong>检查结果：</strong><br>";
+            checks.forEach(check => {
+                if (check.pattern.test(userCode)) {
+                    score += check.weight;
+                    feedbackMsg += check.message + `<br>`;
+                } else {
+                    feedbackMsg += `❌ 缺少：${check.message.replace("✅ ", "")}<br>`;
+                }
+            });
+
+            const finalScore = Math.min(10, Math.floor(score * 10 / 10));
+            this.score += finalScore;
+            
+            feedbackMsg += finalScore >= 7 ? 
+                `<br>💡 得分：${finalScore}/10 (良好)` : 
+                `<br>💡 得分：${finalScore}/10 (参考代码：<pre>${programAnswers.program2}</pre>)`;
+
+            updateScore();
+            feedback.innerHTML = feedbackMsg;
+            feedback.classList.add('show');
+        };
+
+        window.checkProgram3 = function() {
+            const userCode = document.getElementById('program3').value.trim();
+            const feedback = document.getElementById('program3-feedback');
+            
+            let score = 0;
+            const checks = [
+                {
+                    pattern: /for\s*\(\s*a\s*=\s*0\s*;\s*a\s*<=\s*24\s*;\s*a\+\+\s*\)/i,
+                    weight: 2,
+                    message: "✅ 正确遍历5角邮票可能数量"
+                },
+                {
+                    pattern: /for\s*\(\s*b\s*=\s*0\s*;\s*b\s*<=\s*15\s*;\s*b\+\+\s*\)/i,
+                    weight: 2,
+                    message: "✅ 正确遍历8角邮票可能数量"
+                },
+                {
+                    pattern: /for\s*\(\s*c\s*=\s*0\s*;\s*c\s*<=\s*12\s*;\s*c\+\+\s*\)/i,
+                    weight: 2,
+                    message: "✅ 正确遍历1元邮票可能数量"
+                },
+                {
+                    pattern: /if\s*\(\s*a\s*\*\s*0\.5\s*\+\s*b\s*\*\s*0\.8\s*\+\s*c\s*==\s*12\s*\)/i,
+                    weight: 4,
+                    message: "✅ 包含正确的邮资计算"
+                },
+                {
+                    pattern: /count\s*\+\+|count\s*=\s*count\s*\+\s*1/i,
+                    weight: 2,
+                    message: "✅ 包含正确的计数逻辑"
+                }
+            ];
+
+
+            let feedbackMsg = "<strong>检查结果：</strong><br>";
+            checks.forEach(check => {
+                if (check.pattern.test(userCode)) {
+                    score += check.weight;
+                    feedbackMsg += check.message + `<br>`;
+                } else {
+                    feedbackMsg += `❌ 缺少：${check.message.replace("✅ ", "")}<br>`;
+                }
+            });
+
+            const finalScore = Math.min(12, Math.floor(score * 12 / 12));
+            this.score += finalScore;
+            
+            feedbackMsg += finalScore >= 9 ? 
+                `<br>💡 得分：${finalScore}/12 (优秀)` : 
+                `<br>💡 得分：${finalScore}/12 (参考代码：<pre>${programAnswers.program3}</pre>)`;
+
+            updateScore();
+            feedback.innerHTML = feedbackMsg;
+            feedback.classList.add('show');
+        };
+
+        // 初始化分数显示
+        updateScore();
+    </script>
+</body>
+</html>
